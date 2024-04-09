@@ -1,40 +1,40 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { Progress } from '../components';
+import { Colors, dummyBooks } from '../constants';
 
 export default function Book() {
-	const book = {
-		title: 'Wining mentality',
-		author: 'Mendes Guru',
-		image: 'https://i.ibb.co/GsC0Pns/one.jpg',
-		categories: ['fiction', 'sciences', 'finance'],
-	};
-
 	return (
 		<View style={styles.container}>
 			<View style={styles.bookHeading}>
 				<Text style={{ fontSize: 20 }}>Books currently reading</Text>
 			</View>
-			<View style={styles.book}>
-				<View style={styles.bookLeft}>
-					<Image
-						source={{ uri: book.image }}
-						style={styles.bookImage}
-						resizeMode="cover"
-					/>
-					<View style={styles.bookDetails}>
-						<Text style={styles.title}>{book.title}</Text>
-						<Text style={styles.author}>{book.author}</Text>
-						<View style={styles.categories}>
-							{book.categories.map((category) => (
-								<Text style={{ fontStyle: 'italic' }}>{category} |</Text>
-							))}
+			{dummyBooks.map((book) => (
+				<TouchableOpacity style={styles.book}>
+					<View style={styles.bookLeft}>
+						<Image
+							source={{ uri: book.image }}
+							style={styles.bookImage}
+							resizeMode="cover"
+						/>
+						<View style={styles.bookDetails}>
+							<Text style={styles.title}>{book.title}</Text>
+							<Text style={styles.author}>{book.author}</Text>
+							<View style={styles.categories}>
+								{book.categories.map((category, index) => (
+									<Text style={{ fontStyle: 'italic' }}>
+										{category}
+										{index !== book.categories.length - 1 && ' |'}
+									</Text>
+								))}
+							</View>
 						</View>
 					</View>
-				</View>
-				<View>
-					<Text>Progress</Text>
-				</View>
-			</View>
+					<View>
+						<Progress percentage={book.progress} />
+					</View>
+				</TouchableOpacity>
+			))}
 		</View>
 	);
 }
@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
 	},
 	book: {
 		flexDirection: 'row',
-		gap: 10,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		borderWidth: 1,
+		borderColor: Colors.background2,
 		borderRadius: 10,
 		padding: 8,
-		margin: 8,
+		marginVertical: 4,
+		marginHorizontal: 8,
 	},
 	bookLeft: {
 		flexDirection: 'row',
