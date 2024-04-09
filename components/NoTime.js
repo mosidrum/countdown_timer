@@ -21,11 +21,11 @@ export default function NoTime({ navigation }) {
 			</View>
 			<View style={styles.buttonContainer}>
 				{show ? (
-					<TimePicker />
+					<TimePicker setShow={setShow} />
 				) : (
 					<Button
 						title="Set Today's Goal"
-						onPress={() => navigation.navigate('SetTime')}
+						onPress={() => setShow(true)}
 					/>
 				)}
 			</View>

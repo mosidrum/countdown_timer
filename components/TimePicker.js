@@ -6,6 +6,7 @@ import {
 	StyleSheet,
 	FlatList,
 } from 'react-native';
+import { Colors } from '../constants';
 
 const timeOptions = [
 	{ label: '1 minutes', value: 1 },
@@ -18,7 +19,8 @@ const timeOptions = [
 	{ label: '60 minutes', value: 60 },
 ];
 
-export default function TimePicker({ onSelectedTime }) {
+export default function TimePicker(props) {
+	const { onSelectedTime, setShow } = props;
 	const [selectedTime, setSelectedTime] = useState(null);
 
 	const handleTimeSelection = (time) => {
@@ -37,6 +39,12 @@ export default function TimePicker({ onSelectedTime }) {
 
 	return (
 		<View style={styles.container}>
+			<TouchableOpacity
+				style={styles.header}
+				onPress={() => setShow(false)}
+			>
+				<Text style={styles.headerText}>Done</Text>
+			</TouchableOpacity>
 			<View style={styles.flatListContainer}>
 				<FlatList
 					data={timeOptions}
@@ -72,5 +80,18 @@ const styles = StyleSheet.create({
 		borderBottomColor: '#ccc',
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		paddingHorizontal: 20,
+		paddingVertical: 8,
+		borderBottomWidth: 1,
+		backgroundColor: Colors.background2,
+		borderBottomColor: '#ccc',
+	},
+	headerText: {
+		fontSize: 16,
+		fontWeight: 'bold',
 	},
 });
