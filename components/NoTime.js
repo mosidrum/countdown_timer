@@ -43,7 +43,7 @@ export default function NoTime({ navigation }) {
 						/>
 						<Button
 							title="Start Reading"
-							onPress={() => handleStartReading()}
+							onPress={() => navigation.navigate('Book')}
 							backgroundColor={Colors.buttonColor}
 						/>
 					</View>

@@ -2,15 +2,23 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Welcome, SetGoal, Timmer } from './screens';
-import { SetTime } from './components';
+import { Welcome, SetGoal, Timmer, Book } from './screens';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName="Welcome">
+			<Stack.Navigator initialRouteName="Book">
+				<Stack.Screen
+					name="Book"
+					component={Book}
+					options={{
+						headerShown: true,
+						headerTitle: 'Select Book',
+						headerTitleAlign: 'center',
+					}}
+				/>
 				<Stack.Screen
 					name="Welcome"
 					component={Welcome}
@@ -29,15 +37,6 @@ export default function App() {
 					name="Timmer"
 					component={Timmer}
 					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="SetTime"
-					component={SetTime}
-					options={{
-						headerShown: true,
-						headerTitle: 'Set Time',
-						headerTitleAlign: 'center',
-					}}
 				/>
 			</Stack.Navigator>
 		</NavigationContainer>
