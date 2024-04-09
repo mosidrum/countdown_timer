@@ -1,8 +1,11 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
+import TimePicker from './TimePicker';
 
 export default function NoTime({ navigation }) {
+	const [show, setShow] = useState(true);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.textContainer}>
@@ -17,10 +20,14 @@ export default function NoTime({ navigation }) {
 				/>
 			</View>
 			<View style={styles.buttonContainer}>
-				<Button
-					title="Set Today's Goal"
-					onPress={() => navigation.navigate('SetTime')}
-				/>
+				{show ? (
+					<TimePicker />
+				) : (
+					<Button
+						title="Set Today's Goal"
+						onPress={() => navigation.navigate('SetTime')}
+					/>
+				)}
 			</View>
 		</View>
 	);
