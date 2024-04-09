@@ -1,6 +1,6 @@
 const Colors = {
 	white: '#FFF',
-	black: '#22222',
+	black: '#222222',
 	background: '#fbfffe',
 	secondary: '#fff',
 	buttonColor: '#faa916',

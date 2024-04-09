@@ -29,11 +29,12 @@ export default function Welcome({ navigation }) {
 					<Text style={styles.text}>Track your daily reading, log your</Text>
 					<Text style={styles.text}>thoughts and favourite quotes</Text>
 				</View>
-				<Button
-					title="Set Today's Goal"
-					onPress={onPress}
-					style={styles.button}
-				/>
+				<View style={styles.buttonContainer}>
+					<Button
+						title="Set Today's Goal"
+						onPress={onPress}
+					/>
+				</View>
 			</View>
 		</LinearGradient>
 	);
@@ -44,34 +45,38 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	imageContainer: {
-		flex: 0.7, // Take 60% of the available space
+		flex: 0.7,
 		justifyContent: 'center',
 		alignItems: 'center',
-    paddingTop: 60
+		paddingTop: 60,
 	},
 	image: {
-		height: '100%', // Adjust as needed
-		width: '100%', // Adjust as needed
+		height: '100%',
+		width: '100%',
 	},
 	contentContainer: {
-		flex: 0.4, // Take remaining 40% of the available space
+		flex: 0.4,
 		paddingHorizontal: 22,
-		// paddingTop: 20, // Adjust as needed
+		marginTop: -56,
 	},
 	title: {
 		fontSize: 36,
 		color: Colors.black,
 	},
 	textContainer: {
-		marginTop: 12,
-    marginBottom: 52
+		marginBottom: 42,
+    marginTop: 10,
 	},
 	text: {
 		fontSize: 18,
 		color: Colors.black,
 		marginVertical: 4,
 	},
-	button: {
-		marginTop: 20, // Adjust as needed
+	buttonContainer: {
+		position: 'absolute',
+		bottom: 20,
+		left: 0,
+		right: 0,
+		paddingHorizontal: 10,
 	},
 });
