@@ -20,18 +20,18 @@ const timeOptions = [
 ];
 
 export default function TimePicker(props) {
-	const { onSelectedTime, setShow } = props;
-	const [selectedTime, setSelectedTime] = useState(null);
+	const { setShow, setSelectedTime } = props;
 
 	const handleTimeSelection = (time) => {
 		setSelectedTime(time);
-		onSelectedTime(time);
 	};
 
 	const renderTimeOption = ({ item }) => (
 		<TouchableOpacity
 			style={styles.timeOption}
-			onPress={() => handleTimeSelection(item.value)}
+			onPress={() => {
+				handleTimeSelection(item.value), setShow(false);
+			}}
 		>
 			<Text>{item.label}</Text>
 		</TouchableOpacity>
@@ -43,7 +43,7 @@ export default function TimePicker(props) {
 				style={styles.header}
 				onPress={() => setShow(false)}
 			>
-				<Text style={styles.headerText}>Done</Text>
+				<Text style={styles.headerText}>Cancel</Text>
 			</TouchableOpacity>
 			<View style={styles.flatListContainer}>
 				<FlatList

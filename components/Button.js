@@ -3,12 +3,13 @@ import React from 'react';
 import { Colors } from '../constants';
 
 export default function Button(props) {
+	const { onPress, title, backgroundColor } = props;
 	return (
 		<TouchableOpacity
-			onPress={props.onPress}
-			style={styles.button}
+			onPress={onPress}
+			style={[styles.button, { backgroundColor}]}
 		>
-			<Text style={styles.text}>{props.title}</Text>
+			<Text style={styles.text}>{title}</Text>
 		</TouchableOpacity>
 	);
 }
@@ -20,10 +21,10 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: Colors.buttonColor,
 	},
 	text: {
 		color: Colors.black,
-		fontSize: 20,
+		fontSize: 18,
+		fontWeight: '600',
 	},
 });

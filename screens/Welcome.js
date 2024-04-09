@@ -31,8 +31,9 @@ export default function Welcome({ navigation }) {
 				</View>
 				<View style={styles.buttonContainer}>
 					<Button
-						title="Set Today's Goal"
+						title="START"
 						onPress={onPress}
+						backgroundColor={Colors.buttonColor}
 					/>
 				</View>
 			</View>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
 	},
 	textContainer: {
 		marginBottom: 42,
-    marginTop: 10,
+		marginTop: 10,
 	},
 	text: {
 		fontSize: 18,

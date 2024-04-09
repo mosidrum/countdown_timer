@@ -2,30 +2,56 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import Button from './Button';
 import TimePicker from './TimePicker';
+import SelectedTime from './SelectedTime';
+import { Colors } from '../constants';
 
 export default function NoTime({ navigation }) {
-	const [show, setShow] = useState(true);
+	const [show, setShow] = useState(false);
+	const [selectedTime, setSelectedTime] = useState(null);
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.textContainer}>
 				<Text style={styles.text}>
-					You have not set a goal. Set a goal now to get motivated
+					{selectedTime
+						? `You are reading ${selectedTime} minutes today, maximise your time`
+						: 'You have not set a goal. Set a goal now to get motivated'}
 				</Text>
 			</View>
 			<View style={styles.imageContainer}>
-				<Image
-					source={require('../assets/running.png')}
-					style={styles.image}
-				/>
+				{selectedTime ? (
+					<SelectedTime selectedTime={selectedTime} />
+				) : (
+					<Image
+						source={require('../assets/running.png')}
+						style={styles.image}
+					/>
+				)}
 			</View>
 			<View style={styles.buttonContainer}>
 				{show ? (
-					<TimePicker setShow={setShow} />
+					<TimePicker
+						setShow={setShow}
+						setSelectedTime={setSelectedTime}
+					/>
+				) : selectedTime ? (
+					<View style={{ gap: 10}}>
+						<Button
+							title="Change Time"
+							onPress={() => setShow(true)}
+							backgroundColor={Colors.background2}
+						/>
+						<Button
+							title="Start Reading"
+							onPress={() => handleStartReading()}
+							backgroundColor={Colors.buttonColor}
+						/>
+					</View>
 				) : (
 					<Button
 						title="Set Today's Goal"
 						onPress={() => setShow(true)}
+						backgroundColor={Colors.buttonColor}
 					/>
 				)}
 			</View>
