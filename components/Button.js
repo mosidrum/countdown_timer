@@ -4,9 +4,12 @@ import { Colors } from '../constants';
 
 export default function Button(props) {
 	return (
-		<TouchableOpacity onPress={props.onPress} style={styles.button}>
-      <Text>{props.title}</Text>
-    </TouchableOpacity>
+		<TouchableOpacity
+			onPress={props.onPress}
+			style={styles.button}
+		>
+			<Text style={styles.text}>{props.title}</Text>
+		</TouchableOpacity>
 	);
 }
 
@@ -14,10 +17,13 @@ const styles = StyleSheet.create({
 	button: {
 		paddingBottom: 16,
 		paddingVertical: 10,
-		borderColor: Colors.primary,
-		borderWidth: 2,
 		borderRadius: 12,
 		alignItems: 'center',
-		justifyContent: 'centeer',
+		justifyContent: 'center',
+		backgroundColor: Colors.buttonColor,
+	},
+	text: {
+		color: Colors.black,
+		fontSize: 20,
 	},
 });

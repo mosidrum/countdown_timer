@@ -23,11 +23,11 @@ export default function Welcome({ navigation }) {
 				/>
 			</View>
 			<View style={styles.contentContainer}>
-				<Text style={styles.title}>Let's get</Text>
-				<Text style={styles.title}>Started</Text>
+				<Text style={styles.title}>Let's make a</Text>
+				<Text style={styles.title}>habit of reading</Text>
 				<View style={styles.textContainer}>
-					<Text style={styles.text}>Read and become a future leader</Text>
-					<Text style={styles.text}>Read and be informed</Text>
+					<Text style={styles.text}>Track your daily reading, log your</Text>
+					<Text style={styles.text}>thoughts and favourite quotes</Text>
 				</View>
 				<Button
 					title="Set Today's Goal"
@@ -59,16 +59,16 @@ const styles = StyleSheet.create({
 		// paddingTop: 20, // Adjust as needed
 	},
 	title: {
-		fontSize: 50,
-		fontWeight: '800',
-		color: Colors.white,
+		fontSize: 36,
+		color: Colors.black,
 	},
 	textContainer: {
-		marginVertical: 22,
+		marginTop: 12,
+    marginBottom: 52
 	},
 	text: {
-		fontSize: 16,
-		color: Colors.white,
+		fontSize: 18,
+		color: Colors.black,
 		marginVertical: 4,
 	},
 	button: {
