@@ -8,7 +8,7 @@ export default function SelectedTime(props) {
 
 	useEffect(() => {
 		let intervalId;
-
+    setTimeRemaining(selectedTime * 60)
 		if (startCount && selectedTime > 0) {
 			intervalId = setInterval(() => {
 				setTimeRemaining((prevTime) => Math.max(0, prevTime - 1));

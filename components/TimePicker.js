@@ -16,7 +16,7 @@ const timeOptions = [
 	{ label: '30 minutes', value: 30 },
 	{ label: '40 minutes', value: 40 },
 	{ label: '50 minutes', value: 50 },
-	{ label: '60 minutes', value: 60 },
+	{ label: '59 minutes', value: 59 },
 ];
 
 export default function TimePicker(props) {
