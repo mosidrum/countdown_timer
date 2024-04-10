@@ -5,6 +5,7 @@ import TimePicker from './TimePicker';
 import SelectedTime from './SelectedTime';
 import Progress from './Progress';
 import BookTemplate from './BookTemplate';
+import ShareThoughts from './ShareThoughts';
 
 export {
 	Button,
@@ -14,4 +15,5 @@ export {
 	SelectedTime,
 	Progress,
 	BookTemplate,
+	ShareThoughts,
 };

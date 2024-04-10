@@ -70,7 +70,9 @@ export default function NoTime({ book }) {
 					<View style={{ gap: 10 }}>
 						<Button
 							title="Change Time"
-							onPress={() => setShow(true)}
+							onPress={() => {
+								setShow(true), setStartCount(startCount);
+							}}
 							backgroundColor={Colors.background2}
 						/>
 						<Button
