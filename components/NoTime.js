@@ -10,13 +10,6 @@ export default function NoTime({ book }) {
 	const [show, setShow] = useState(false);
 	const [selectedTime, setSelectedTime] = useState(null);
 	const [startCount, setStartCount] = useState(false);
-	const [remainingTime, setRemainingTime] = useState(selectedTime);
-
-	useEffect(() => {
-		if (!startCount) {
-			setRemainingTime(selectedTime);
-		}
-	}, [startCount]);
 
 	return (
 		<View style={styles.container}>
@@ -59,8 +52,6 @@ export default function NoTime({ book }) {
 					<SelectedTime
 						selectedTime={selectedTime}
 						startCount={startCount}
-						setRemainingTime={setRemainingTime}
-						remainingTime={remainingTime}
 					/>
 				) : (
 					<Image
@@ -85,6 +76,7 @@ export default function NoTime({ book }) {
 						<Button
 							title="Start Reading"
 							backgroundColor={Colors.buttonColor}
+							onPress={() => setStartCount(true)}
 						/>
 					</View>
 				) : (

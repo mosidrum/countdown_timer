@@ -20,7 +20,7 @@ export const dummyBooks = [
 		title: 'The good man',
 		author: 'Luis Kind',
 		image: 'https://i.ibb.co/cb1q9Wp/two.jpg',
-		categories: ['Computers', 'Programming', 'Philosophy'],
+		categories: ['Computers', 'Programming',],
 		progress: 52,
 	},
 ];
