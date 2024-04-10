@@ -9,7 +9,12 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName="Book">
+			<Stack.Navigator initialRouteName="Welcome">
+				<Stack.Screen
+					name="Welcome"
+					component={Welcome}
+					options={{ headerShown: false }}
+				/>
 				<Stack.Screen
 					name="Book"
 					component={Book}
@@ -18,11 +23,6 @@ export default function App() {
 						headerTitle: 'Select Book',
 						headerTitleAlign: 'center',
 					}}
-				/>
-				<Stack.Screen
-					name="Welcome"
-					component={Welcome}
-					options={{ headerShown: false }}
 				/>
 				<Stack.Screen
 					name="SetGoal"

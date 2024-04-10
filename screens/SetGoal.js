@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { NoTime, SetTime } from '../components';
 import { View } from 'react-native';
 
-export default function SetGoal({navigation}) {
-	const [readingTime, setReadingTime] = useState(0);
+export default function SetGoal({ route }) {
+	const { book } = route.params;
 
-	return <>{readingTime > 0 ? <SetTime /> : <NoTime navigation={navigation}/>}</>;
+	return (
+		<>
+			<NoTime book={book} />
+		</>
+	);
 }

@@ -1,17 +1,53 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from './Button';
 import TimePicker from './TimePicker';
 import SelectedTime from './SelectedTime';
-import { Colors } from '../constants';
+import { BookStyles, Colors } from '../constants';
+import Progress from './Progress';
 
-export default function NoTime({ navigation }) {
+export default function NoTime({ book }) {
 	const [show, setShow] = useState(false);
 	const [selectedTime, setSelectedTime] = useState(null);
+	const [startCount, setStartCount] = useState(false);
+	const [remainingTime, setRemainingTime] = useState(selectedTime);
+
+	useEffect(() => {
+		if (!startCount) {
+			setRemainingTime(selectedTime);
+		}
+	}, [startCount]);
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.textContainer}>
+				<View style={BookStyles.book}>
+					<View style={BookStyles.bookLeft}>
+						<Image
+							source={{ uri: book.image }}
+							style={BookStyles.bookImage}
+							resizeMode="cover"
+						/>
+						<View style={BookStyles.bookDetails}>
+							<Text style={BookStyles.title}>{book.title}</Text>
+							<Text style={BookStyles.author}>{book.author}</Text>
+							<View style={BookStyles.categories}>
+								{book.categories.map((category, index) => (
+									<Text
+										key={index}
+										style={{ fontStyle: 'italic' }}
+									>
+										{category}
+										{index !== book.categories.length - 1 && ' |'}
+									</Text>
+								))}
+							</View>
+						</View>
+					</View>
+					<View>
+						<Progress percentage={book.progress} />
+					</View>
+				</View>
 				<Text style={styles.text}>
 					{selectedTime
 						? `You are reading ${selectedTime} minutes today, maximise your time`
@@ -20,7 +56,12 @@ export default function NoTime({ navigation }) {
 			</View>
 			<View style={styles.imageContainer}>
 				{selectedTime ? (
-					<SelectedTime selectedTime={selectedTime} />
+					<SelectedTime
+						selectedTime={selectedTime}
+						startCount={startCount}
+						setRemainingTime={setRemainingTime}
+						remainingTime={remainingTime}
+					/>
 				) : (
 					<Image
 						source={require('../assets/running.png')}
@@ -35,7 +76,7 @@ export default function NoTime({ navigation }) {
 						setSelectedTime={setSelectedTime}
 					/>
 				) : selectedTime ? (
-					<View style={{ gap: 10}}>
+					<View style={{ gap: 10 }}>
 						<Button
 							title="Change Time"
 							onPress={() => setShow(true)}
@@ -43,7 +84,6 @@ export default function NoTime({ navigation }) {
 						/>
 						<Button
 							title="Start Reading"
-							onPress={() => navigation.navigate('Book')}
 							backgroundColor={Colors.buttonColor}
 						/>
 					</View>
@@ -62,16 +102,16 @@ export default function NoTime({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 10,
+		padding: 4,
 	},
 	textContainer: {
-		paddingHorizontal: 30,
-		marginTop: 60,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	text: {
 		fontSize: 21,
+		marginTop: 20,
+		paddingHorizontal: 30,
 		textAlign: 'center',
 	},
 	imageContainer: {

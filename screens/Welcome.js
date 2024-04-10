@@ -7,7 +7,7 @@ import SetGoal from './SetGoal';
 
 export default function Welcome({ navigation }) {
 	const onPress = () => {
-		navigation.navigate('SetGoal');
+		navigation.navigate('Book');
 	};
 
 	return (
