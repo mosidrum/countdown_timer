@@ -5,7 +5,7 @@ import ShareThoughts from './ShareThoughts';
 export default function SelectedTime(props) {
 	const { selectedTime, startCount } = props;
 	const [timeRemaining, setTimeRemaining] = useState(selectedTime * 60);
-	const [modal, setModal] = useState(false);
+	const [modalVisible, setModalVisible] = useState(false);
 
 	useEffect(() => {
 		let intervalId;
@@ -14,9 +14,6 @@ export default function SelectedTime(props) {
 			intervalId = setInterval(() => {
 				setTimeRemaining((prevTime) => {
 					const timeFinished = Math.max(0, prevTime - 1);
-					if (timeFinished === 0) {
-						setModal(true);
-					}
 					return timeFinished;
 				});
 			}, 1000);
@@ -26,6 +23,12 @@ export default function SelectedTime(props) {
 
 		return () => clearInterval(intervalId);
 	}, [startCount, selectedTime]);
+
+	useEffect(() => {
+		if (timeRemaining === 0) {
+			setModalVisible(true);
+		}
+	}, [timeRemaining]);
 
 	const formatTime = (time) => {
 		const minutes = Math.floor(time / 60);
@@ -39,10 +42,10 @@ export default function SelectedTime(props) {
 			<View style={styles.container}>
 				<Text style={styles.time}>{formatTime(timeRemaining)}</Text>
 			</View>
-			{modal && (
+			{modalVisible && (
 				<ShareThoughts
-					visible={modal}
-					onClose={() => setModal(!modal)}
+					visible={modalVisible}
+					onClose={() => setModalVisible(!modalVisible)}
 				/>
 			)}
 		</>

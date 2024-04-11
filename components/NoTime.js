@@ -12,6 +12,21 @@ export default function NoTime({ book }) {
 	const [startCount, setStartCount] = useState(false);
 	const [stayOnTimmer, setStayOnTimmer] = useState(false);
 
+  const checkTheSelectedTime = (time) => {
+		if (time <= 0 || time === null) {
+			Alert.alert(
+				'No time',
+				'Please select time',
+				[
+					{
+						text: 'OK',
+					},
+				],
+				{ cancelable: false }
+			);
+		}
+	};
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.textContainer}>
@@ -90,7 +105,7 @@ export default function NoTime({ book }) {
 							<Button
 								title="Start Reading"
 								backgroundColor={Colors.buttonColor}
-								onPress={() => setStartCount(true)}
+								onPress={() =>{checkTheSelectedTime(selectedTime), setStartCount(true)}}
 							/>
 						)}
 					</View>
