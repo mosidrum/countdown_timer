@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import ShareThoughts from './ShareThoughts';
+import Modal from './LogModal';
 
 export default function SelectedTime(props) {
-	const { selectedTime, startCount, setSelectedTime } = props;
+	const { selectedTime, startCount, whileReading, setWhileReading } = props;
 	const [timeRemaining, setTimeRemaining] = useState(selectedTime * 60);
 	const [modalVisible, setModalVisible] = useState(false);
 
@@ -46,7 +47,15 @@ export default function SelectedTime(props) {
 				<ShareThoughts
 					visible={modalVisible}
 					onClose={() => {
-						setModalVisible(!modalVisible), setSelectedTime(0);
+						setModalVisible(!modalVisible);
+					}}
+				/>
+			)}
+			{whileReading && (
+				<Modal
+					visible={whileReading}
+					onClose={() => {
+						setWhileReading(false);
 					}}
 				/>
 			)}

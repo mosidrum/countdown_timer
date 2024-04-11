@@ -6,6 +6,7 @@ import SelectedTime from './SelectedTime';
 import Progress from './Progress';
 import BookTemplate from './BookTemplate';
 import ShareThoughts from './ShareThoughts';
+import LogModal from './LogModal';
 
 export {
 	Button,
@@ -16,4 +17,5 @@ export {
 	Progress,
 	BookTemplate,
 	ShareThoughts,
+	LogModal,
 };

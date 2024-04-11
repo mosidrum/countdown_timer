@@ -8,9 +8,10 @@ import Progress from './Progress';
 
 export default function NoTime({ book }) {
 	const [show, setShow] = useState(false);
-	const [selectedTime, setSelectedTime] = useState(null);
+	const [selectedTime, setSelectedTime] = useState(selectedTime);
 	const [startCount, setStartCount] = useState(false);
 	const [stayOnTimmer, setStayOnTimmer] = useState(false);
+	const [whileReading, setWhileReading] = useState(false);
 
 	const checkTheSelectedTime = (time) => {
 		if (time <= 0 || time === null) {
@@ -24,8 +25,26 @@ export default function NoTime({ book }) {
 				],
 				{ cancelable: false }
 			);
+		} else {
+			setStartCount(true);
 		}
-		setStartCount(true);
+	};
+
+
+	const checkBeforeLog = (time) => {
+		if (time <= 0 || time === null) {
+			Alert.alert(
+				'Se;ect time',
+				'Please select  before you can log thought',
+				[
+					{
+						text: 'OK',
+					},
+				],
+				{ cancelable: false }
+			);
+		}
+			setWhileReading(true);
 	};
 
 	return (
@@ -69,7 +88,9 @@ export default function NoTime({ book }) {
 					<SelectedTime
 						selectedTime={selectedTime}
 						startCount={startCount}
-            setSelectedTime={setSelectedTime}
+						setSelectedTime={setSelectedTime}
+						whileReading={whileReading}
+						setWhileReading={setWhileReading}
 					/>
 				) : (
 					<Image
@@ -86,20 +107,31 @@ export default function NoTime({ book }) {
 					/>
 				) : selectedTime || stayOnTimmer ? (
 					<View style={{ gap: 10 }}>
-						<Button
-							title="Change Time"
-							onPress={() => {
-								setShow(true);
-							}}
-							backgroundColor={Colors.background2}
-						/>
+						<View
+							style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+						>
+							<Button
+								title="Change Time"
+								onPress={() => {
+									setShow(true);
+								}}
+								backgroundColor={Colors.background2}
+							/>
+							{startCount && (
+								<Button
+									title="Log Thought"
+									onPress={() => checkBeforeLog(selectedTime)}
+									backgroundColor={Colors.buttonColor}
+								/>
+							)}
+						</View>
 						{startCount && selectedTime ? (
 							<Button
 								title="Stop Timmer"
 								backgroundColor={Colors.buttonColor}
 								onPress={() => {
-									setStartCount(false);
-									setSelectedTime(null);
+									setStartCount(!startCount);
+									setSelectedTime(!selectedTime);
 									setStayOnTimmer(true);
 								}}
 							/>
