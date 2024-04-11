@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ShareThoughts from './ShareThoughts';
 
 export default function SelectedTime(props) {
-	const { selectedTime, startCount } = props;
+	const { selectedTime, startCount, setSelectedTime } = props;
 	const [timeRemaining, setTimeRemaining] = useState(selectedTime * 60);
 	const [modalVisible, setModalVisible] = useState(false);
 
@@ -45,7 +45,9 @@ export default function SelectedTime(props) {
 			{modalVisible && (
 				<ShareThoughts
 					visible={modalVisible}
-					onClose={() => setModalVisible(!modalVisible)}
+					onClose={() => {
+						setModalVisible(!modalVisible), setSelectedTime(0);
+					}}
 				/>
 			)}
 		</>

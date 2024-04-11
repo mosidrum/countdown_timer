@@ -12,7 +12,7 @@ export default function NoTime({ book }) {
 	const [startCount, setStartCount] = useState(false);
 	const [stayOnTimmer, setStayOnTimmer] = useState(false);
 
-  const checkTheSelectedTime = (time) => {
+	const checkTheSelectedTime = (time) => {
 		if (time <= 0 || time === null) {
 			Alert.alert(
 				'No time',
@@ -25,6 +25,7 @@ export default function NoTime({ book }) {
 				{ cancelable: false }
 			);
 		}
+		setStartCount(true);
 	};
 
 	return (
@@ -68,6 +69,7 @@ export default function NoTime({ book }) {
 					<SelectedTime
 						selectedTime={selectedTime}
 						startCount={startCount}
+            setSelectedTime={setSelectedTime}
 					/>
 				) : (
 					<Image
@@ -87,17 +89,17 @@ export default function NoTime({ book }) {
 						<Button
 							title="Change Time"
 							onPress={() => {
-								setShow(true), setStartCount(startCount);
+								setShow(true);
 							}}
 							backgroundColor={Colors.background2}
 						/>
-						{startCount ? (
+						{startCount && selectedTime ? (
 							<Button
 								title="Stop Timmer"
 								backgroundColor={Colors.buttonColor}
 								onPress={() => {
 									setStartCount(false);
-									setSelectedTime(0);
+									setSelectedTime(null);
 									setStayOnTimmer(true);
 								}}
 							/>
@@ -105,7 +107,7 @@ export default function NoTime({ book }) {
 							<Button
 								title="Start Reading"
 								backgroundColor={Colors.buttonColor}
-								onPress={() =>{checkTheSelectedTime(selectedTime), setStartCount(true)}}
+								onPress={() => checkTheSelectedTime(selectedTime)}
 							/>
 						)}
 					</View>
