@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
 import TimePicker from './TimePicker';
 import SelectedTime from './SelectedTime';
@@ -10,6 +10,7 @@ export default function NoTime({ book }) {
 	const [show, setShow] = useState(false);
 	const [selectedTime, setSelectedTime] = useState(null);
 	const [startCount, setStartCount] = useState(false);
+	const [stayOnTimmer, setStayOnTimmer] = useState(false);
 
 	return (
 		<View style={styles.container}>
@@ -48,7 +49,7 @@ export default function NoTime({ book }) {
 				</Text>
 			</View>
 			<View style={styles.imageContainer}>
-				{selectedTime ? (
+				{selectedTime || stayOnTimmer ? (
 					<SelectedTime
 						selectedTime={selectedTime}
 						startCount={startCount}
@@ -66,7 +67,7 @@ export default function NoTime({ book }) {
 						setShow={setShow}
 						setSelectedTime={setSelectedTime}
 					/>
-				) : selectedTime ? (
+				) : selectedTime || stayOnTimmer ? (
 					<View style={{ gap: 10 }}>
 						<Button
 							title="Change Time"
@@ -75,11 +76,23 @@ export default function NoTime({ book }) {
 							}}
 							backgroundColor={Colors.background2}
 						/>
-						<Button
-							title="Start Reading"
-							backgroundColor={Colors.buttonColor}
-							onPress={() => setStartCount(true)}
-						/>
+						{startCount ? (
+							<Button
+								title="Stop Timmer"
+								backgroundColor={Colors.buttonColor}
+								onPress={() => {
+									setStartCount(false);
+									setSelectedTime(0);
+									setStayOnTimmer(true);
+								}}
+							/>
+						) : (
+							<Button
+								title="Start Reading"
+								backgroundColor={Colors.buttonColor}
+								onPress={() => setStartCount(true)}
+							/>
+						)}
 					</View>
 				) : (
 					<Button

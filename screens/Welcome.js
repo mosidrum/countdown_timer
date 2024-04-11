@@ -22,14 +22,14 @@ export default function Welcome({ navigation }) {
 					resizeMode="contain"
 				/>
 			</View>
-			<View style={styles.contentContainer}>
-				<Text style={styles.title}>Let's make a</Text>
-				<Text style={styles.title}>habit of reading</Text>
-				<View style={styles.textContainer}>
-					<Text style={styles.text}>Track your daily reading, log your</Text>
-					<Text style={styles.text}>thoughts and favourite quotes</Text>
-				</View>
-				<View style={styles.buttonContainer}>
+			<View style={styles.contentAndButtonContainer}>
+				<View style={styles.contentContainer}>
+					<Text style={styles.title}>Let's make a</Text>
+					<Text style={styles.title}>habit of reading</Text>
+					<View style={styles.textContainer}>
+						<Text style={styles.text}>Track your daily reading, log your</Text>
+						<Text style={styles.text}>thoughts and favourite quotes</Text>
+					</View>
 					<Button
 						title="START"
 						onPress={onPress}
@@ -55,10 +55,12 @@ const styles = StyleSheet.create({
 		height: '100%',
 		width: '100%',
 	},
-	contentContainer: {
+	contentAndButtonContainer: {
 		flex: 0.4,
+		justifyContent: 'space-between',
+	},
+	contentContainer: {
 		paddingHorizontal: 22,
-		marginTop: -56,
 	},
 	title: {
 		fontSize: 36,
@@ -72,12 +74,5 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		color: Colors.black,
 		marginVertical: 4,
-	},
-	buttonContainer: {
-		position: 'absolute',
-		bottom: 20,
-		left: 0,
-		right: 0,
-		paddingHorizontal: 10,
 	},
 });

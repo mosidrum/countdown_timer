@@ -13,7 +13,7 @@ import { Colors } from '../constants';
 import Button from './Button';
 
 export default function ShareThoughts({ visible, onClose, navigation }) {
-	const [value, onChangeText] = useState('Useless Multiline ');
+	const [value, onChangeText] = useState('Log your thought here');
 	const onPress = () => {
 		navigation.navigate('Welcome');
 	};
@@ -56,10 +56,11 @@ export default function ShareThoughts({ visible, onClose, navigation }) {
 								borderColor: Colors.background2,
 								paddingHorizontal: 8,
 								textAlignVertical: 'top',
+								padding: 6,
 							}}
 						/>
 					</View>
-					<View>
+					<View style={styles.button}>
 						<Button
 							title="Submit"
 							backgroundColor={Colors.buttonColor}
@@ -89,10 +90,12 @@ const styles = StyleSheet.create({
 	},
 	modalContainer: {
 		width: '100%',
+		marginTop: 60,
 	},
 	text: {
 		marginTop: -150,
-		fontSize: 30,
+		fontSize: 22,
+		marginBottom: 14,
 	},
 	closeButton: {
 		position: 'absolute',
@@ -103,5 +106,9 @@ const styles = StyleSheet.create({
 		height: '70%',
 		width: '70%',
 		marginTop: -80,
+	},
+	button: {
+		width: '100%',
+		marginTop: 16,
 	},
 });

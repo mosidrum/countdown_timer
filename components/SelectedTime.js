@@ -5,7 +5,7 @@ import ShareThoughts from './ShareThoughts';
 export default function SelectedTime(props) {
 	const { selectedTime, startCount } = props;
 	const [timeRemaining, setTimeRemaining] = useState(selectedTime * 60);
-	const [modal, setModal] = useState(true);
+	const [modal, setModal] = useState(false);
 
 	useEffect(() => {
 		let intervalId;
@@ -42,7 +42,7 @@ export default function SelectedTime(props) {
 			{modal && (
 				<ShareThoughts
 					visible={modal}
-					onClose={() => setModal(false)}
+					onClose={() => setModal(!modal)}
 				/>
 			)}
 		</>
