@@ -73,17 +73,16 @@ export default function NoTime({ book }) {
 				</Text>
 			</View>
 			<View style={styles.imageContainer}>
-				{selectedTime || !isCounting ? (
+				{selectedTime > 0 && (
 					<SelectedTime
 						showLog={showLog}
 						setShowLog={setShowLog}
 					/>
-				) : (
-					<Image
-						source={require('../assets/running.png')}
-						style={styles.image}
-					/>
 				)}
+				<Image
+					source={require('../assets/running.png')}
+					style={styles.image}
+				/>
 			</View>
 			<View style={styles.buttonContainer}>
 				{show ? (
@@ -108,7 +107,7 @@ export default function NoTime({ book }) {
 								/>
 							)}
 						</View>
-						{isCounting && selectedTime ? (
+						{isCounting && selectedTime !== 0 ? (
 							<Button
 								title="Stop Timmer"
 								backgroundColor={Colors.buttonColor}
