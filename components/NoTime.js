@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Button from './Button';
 import TimePicker from './TimePicker';
 import SelectedTime from './SelectedTime';
-import { BookStyles, Colors } from '../constants';
+import { BookStyles, Colors, noTimeStyles } from '../constants';
 import Progress from './Progress';
 import { useDispatch, useSelector } from 'react-redux';
 import { startCountdown, stopCountdown } from '../reducers/timerSlice';
@@ -37,8 +37,8 @@ export default function NoTime({ book }) {
 	};
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.textContainer}>
+		<View style={noTimeStyles.container}>
+			<View style={noTimeStyles.textContainer}>
 				<View style={BookStyles.book}>
 					<View style={BookStyles.bookLeft}>
 						<Image
@@ -66,13 +66,13 @@ export default function NoTime({ book }) {
 						<Progress percentage={book.progress} />
 					</View>
 				</View>
-				<Text style={styles.text}>
+				<Text style={noTimeStyles.text}>
 					{selectedTime
 						? `You are reading ${selectedTime} minutes today, maximise your time`
 						: 'You have not set a goal. Set a goal now to get motivated'}
 				</Text>
 			</View>
-			<View style={styles.imageContainer}>
+			<View style={noTimeStyles.imageContainer}>
 				{selectedTime > 0 && (
 					<SelectedTime
 						showLog={showLog}
@@ -81,10 +81,10 @@ export default function NoTime({ book }) {
 				)}
 				<Image
 					source={require('../assets/running.png')}
-					style={styles.image}
+					style={noTimeStyles.image}
 				/>
 			</View>
-			<View style={styles.buttonContainer}>
+			<View style={noTimeStyles.buttonContainer}>
 				{show ? (
 					<TimePicker setShow={setShow} />
 				) : selectedTime || stayOnTimmer ? (
@@ -136,36 +136,4 @@ export default function NoTime({ book }) {
 	);
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 4,
-	},
-	textContainer: {
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	text: {
-		fontSize: 21,
-		marginTop: 20,
-		paddingHorizontal: 30,
-		textAlign: 'center',
-	},
-	imageContainer: {
-		flex: 0.5,
-		justifyContent: 'center',
-		alignItems: 'center',
-		paddingTop: 60,
-	},
-	image: {
-		height: '100%',
-		width: '100%',
-	},
-	buttonContainer: {
-		position: 'absolute',
-		bottom: 20,
-		left: 0,
-		right: 0,
-		paddingHorizontal: 10,
-	},
-});
+

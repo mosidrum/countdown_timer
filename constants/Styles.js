@@ -37,3 +37,37 @@ export const BookStyles = StyleSheet.create({
 		gap: 4,
 	},
 });
+
+export const noTimeStyles = StyleSheet.create({
+	container: {
+		flex: 1,
+		padding: 4,
+	},
+	textContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	text: {
+		fontSize: 21,
+		marginTop: 20,
+		paddingHorizontal: 30,
+		textAlign: 'center',
+	},
+	imageContainer: {
+		flex: 0.5,
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingTop: 60,
+	},
+	image: {
+		height: '100%',
+		width: '100%',
+	},
+	buttonContainer: {
+		position: 'absolute',
+		bottom: 20,
+		left: 0,
+		right: 0,
+		paddingHorizontal: 10,
+	},
+});

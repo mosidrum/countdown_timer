@@ -1,5 +1,5 @@
 import Colors from './Colors';
 import { dummyBooks } from './dummyBooks';
-import { BookStyles } from './Styles';
+import { BookStyles, noTimeStyles } from './Styles';
 
-export { Colors, dummyBooks, BookStyles };
+export { Colors, dummyBooks, BookStyles, noTimeStyles };
