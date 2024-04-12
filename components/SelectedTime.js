@@ -1,17 +1,25 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import ShareThoughts from './ShareThoughts';
-import Modal from './LogModal';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+	setSelectedTime,
+	stopCountdown,
+} from '../reducers/timerSlice';
+import LogModal from './LogModal';
 
 export default function SelectedTime(props) {
-	const { selectedTime, startCount, whileReading, setWhileReading } = props;
+	const { showLog, setShowLog } = props;
+	const dispatch = useDispatch();
+	const selectedTime = useSelector((state) => state.timer.selectedTime);
+	const isCounting = useSelector((state) => state.timer.isCounting);
 	const [timeRemaining, setTimeRemaining] = useState(selectedTime * 60);
 	const [modalVisible, setModalVisible] = useState(false);
+	const [thoughts, setThoughts] = useState(false);
 
 	useEffect(() => {
 		let intervalId;
 		setTimeRemaining(selectedTime * 60);
-		if (startCount && selectedTime > 0) {
+		if (isCounting && selectedTime > 0) {
 			intervalId = setInterval(() => {
 				setTimeRemaining((prevTime) => {
 					const timeFinished = Math.max(0, prevTime - 1);
@@ -23,11 +31,13 @@ export default function SelectedTime(props) {
 		}
 
 		return () => clearInterval(intervalId);
-	}, [startCount, selectedTime]);
+	}, [isCounting, selectedTime]);
 
 	useEffect(() => {
 		if (timeRemaining === 0) {
-			setModalVisible(true);
+			dispatch(stopCountdown());
+			dispatch(setSelectedTime(0));
+      setModalVisible(true);
 		}
 	}, [timeRemaining]);
 
@@ -43,19 +53,11 @@ export default function SelectedTime(props) {
 			<View style={styles.container}>
 				<Text style={styles.time}>{formatTime(timeRemaining)}</Text>
 			</View>
-			{modalVisible && (
-				<ShareThoughts
-					visible={modalVisible}
+			{showLog && (
+				<LogModal
+					visible={showLog}
 					onClose={() => {
-						setModalVisible(!modalVisible);
-					}}
-				/>
-			)}
-			{whileReading && (
-				<Modal
-					visible={whileReading}
-					onClose={() => {
-						setWhileReading(false);
+						setShowLog(!showLog);
 					}}
 				/>
 			)}

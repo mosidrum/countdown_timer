@@ -7,6 +7,8 @@ import {
 	FlatList,
 } from 'react-native';
 import { Colors } from '../constants';
+import { useDispatch } from 'react-redux';
+import { setSelectedTime, stopCountdown } from '../reducers/timerSlice';
 
 const timeOptions = [
 	{ label: '1 minutes', value: 1 },
@@ -20,10 +22,12 @@ const timeOptions = [
 ];
 
 export default function TimePicker(props) {
-	const { setShow, setSelectedTime } = props;
+	const { setShow } = props;
+	const dispatch = useDispatch();
 
 	const handleTimeSelection = (time) => {
-		setSelectedTime(time);
+		dispatch(setSelectedTime(time));
+		dispatch(stopCountdown());
 	};
 
 	const renderTimeOption = ({ item }) => (

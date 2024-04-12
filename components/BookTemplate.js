@@ -1,4 +1,4 @@
-import { View, Text, BookStylesheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, Pressable, Image } from 'react-native';
 import React from 'react';
 import Progress from './Progress';
 import { BookStyles } from '../constants';
@@ -6,7 +6,7 @@ import { BookStyles } from '../constants';
 
 export default function BookTemplate({ book, navigation }) {
 	return (
-		<TouchableOpacity
+		<Pressable
 			style={BookStyles.book}
 			onPress={() => navigation.navigate('SetGoal', { book })}
 		>
@@ -35,6 +35,6 @@ export default function BookTemplate({ book, navigation }) {
 			<View>
 				<Progress percentage={book.progress} />
 			</View>
-		</TouchableOpacity>
+		</Pressable>
 	);
 }

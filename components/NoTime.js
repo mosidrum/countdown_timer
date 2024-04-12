@@ -5,16 +5,19 @@ import TimePicker from './TimePicker';
 import SelectedTime from './SelectedTime';
 import { BookStyles, Colors } from '../constants';
 import Progress from './Progress';
+import { useDispatch, useSelector } from 'react-redux';
+import { startCountdown, stopCountdown } from '../reducers/timerSlice';
 
 export default function NoTime({ book }) {
+	const dispatch = useDispatch();
+	const selectedTime = useSelector((state) => state.timer.selectedTime);
+	const isCounting = useSelector((state) => state.timer.isCounting);
 	const [show, setShow] = useState(false);
-	const [selectedTime, setSelectedTime] = useState(selectedTime);
-	const [startCount, setStartCount] = useState(false);
+	const [showLog, setShowLog] = useState(false);
 	const [stayOnTimmer, setStayOnTimmer] = useState(false);
-	const [whileReading, setWhileReading] = useState(false);
 
-	const checkTheSelectedTime = (time) => {
-		if (time <= 0 || time === null) {
+	const checkTheSelectedTime = (selectedTime) => {
+		if (selectedTime <= 0) {
 			Alert.alert(
 				'No time',
 				'Please select time',
@@ -25,26 +28,12 @@ export default function NoTime({ book }) {
 				],
 				{ cancelable: false }
 			);
-		} else {
-			setStartCount(true);
 		}
+		dispatch(startCountdown());
 	};
 
-
-	const checkBeforeLog = (time) => {
-		if (time <= 0 || time === null) {
-			Alert.alert(
-				'Se;ect time',
-				'Please select  before you can log thought',
-				[
-					{
-						text: 'OK',
-					},
-				],
-				{ cancelable: false }
-			);
-		}
-			setWhileReading(true);
+	const handleStartReading = () => {
+		checkTheSelectedTime(selectedTime);
 	};
 
 	return (
@@ -84,13 +73,10 @@ export default function NoTime({ book }) {
 				</Text>
 			</View>
 			<View style={styles.imageContainer}>
-				{selectedTime || stayOnTimmer ? (
+				{selectedTime || !isCounting ? (
 					<SelectedTime
-						selectedTime={selectedTime}
-						startCount={startCount}
-						setSelectedTime={setSelectedTime}
-						whileReading={whileReading}
-						setWhileReading={setWhileReading}
+						showLog={showLog}
+						setShowLog={setShowLog}
 					/>
 				) : (
 					<Image
@@ -101,10 +87,7 @@ export default function NoTime({ book }) {
 			</View>
 			<View style={styles.buttonContainer}>
 				{show ? (
-					<TimePicker
-						setShow={setShow}
-						setSelectedTime={setSelectedTime}
-					/>
+					<TimePicker setShow={setShow} />
 				) : selectedTime || stayOnTimmer ? (
 					<View style={{ gap: 10 }}>
 						<View
@@ -117,21 +100,20 @@ export default function NoTime({ book }) {
 								}}
 								backgroundColor={Colors.background2}
 							/>
-							{startCount && (
+							{isCounting && (
 								<Button
 									title="Log Thought"
-									onPress={() => checkBeforeLog(selectedTime)}
+									onPress={() => setShowLog(isCounting)}
 									backgroundColor={Colors.buttonColor}
 								/>
 							)}
 						</View>
-						{startCount && selectedTime ? (
+						{isCounting && selectedTime ? (
 							<Button
 								title="Stop Timmer"
 								backgroundColor={Colors.buttonColor}
 								onPress={() => {
-									setStartCount(!startCount);
-									setSelectedTime(!selectedTime);
+									dispatch(stopCountdown());
 									setStayOnTimmer(true);
 								}}
 							/>
@@ -139,7 +121,7 @@ export default function NoTime({ book }) {
 							<Button
 								title="Start Reading"
 								backgroundColor={Colors.buttonColor}
-								onPress={() => checkTheSelectedTime(selectedTime)}
+								onPress={handleStartReading}
 							/>
 						)}
 					</View>
