@@ -3,7 +3,6 @@ import React from 'react';
 import Progress from './Progress';
 import { BookStyles } from '../constants';
 
-
 export default function BookTemplate({ book, navigation }) {
 	return (
 		<Pressable

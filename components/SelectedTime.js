@@ -1,11 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	setSelectedTime,
-	stopCountdown,
-} from '../reducers/timerSlice';
+import { setSelectedTime, stopCountdown } from '../reducers/timerSlice';
 import LogModal from './LogModal';
+import { selectedTimeStyles } from '../constants';
 
 export default function SelectedTime(props) {
 	const { showLog, setShowLog } = props;
@@ -13,8 +11,6 @@ export default function SelectedTime(props) {
 	const selectedTime = useSelector((state) => state.timer.selectedTime);
 	const isCounting = useSelector((state) => state.timer.isCounting);
 	const [timeRemaining, setTimeRemaining] = useState(selectedTime * 60);
-	const [modalVisible, setModalVisible] = useState(false);
-	const [thoughts, setThoughts] = useState(false);
 
 	useEffect(() => {
 		let intervalId;
@@ -37,7 +33,6 @@ export default function SelectedTime(props) {
 		if (timeRemaining === 0) {
 			dispatch(stopCountdown());
 			dispatch(setSelectedTime(0));
-      setModalVisible(true);
 		}
 	}, [timeRemaining]);
 
@@ -50,8 +45,8 @@ export default function SelectedTime(props) {
 	};
 	return (
 		<>
-			<View style={styles.container}>
-				<Text style={styles.time}>{formatTime(timeRemaining)}</Text>
+			<View style={selectedTimeStyles.container}>
+				<Text style={selectedTimeStyles.time}>{formatTime(timeRemaining)}</Text>
 			</View>
 			{showLog && (
 				<LogModal
@@ -64,14 +59,3 @@ export default function SelectedTime(props) {
 		</>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	time: {
-		fontSize: 26,
-		fontWeight: 'bold',
-	},
-});

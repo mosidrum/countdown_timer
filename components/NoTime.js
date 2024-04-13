@@ -7,6 +7,7 @@ import { BookStyles, Colors, noTimeStyles } from '../constants';
 import Progress from './Progress';
 import { useDispatch, useSelector } from 'react-redux';
 import { startCountdown, stopCountdown } from '../reducers/timerSlice';
+import BookTemplate from './BookTemplate';
 
 export default function NoTime({ book }) {
 	const dispatch = useDispatch();
@@ -39,33 +40,7 @@ export default function NoTime({ book }) {
 	return (
 		<View style={noTimeStyles.container}>
 			<View style={noTimeStyles.textContainer}>
-				<View style={BookStyles.book}>
-					<View style={BookStyles.bookLeft}>
-						<Image
-							source={{ uri: book.image }}
-							style={BookStyles.bookImage}
-							resizeMode="cover"
-						/>
-						<View style={BookStyles.bookDetails}>
-							<Text style={BookStyles.title}>{book.title}</Text>
-							<Text style={BookStyles.author}>{book.author}</Text>
-							<View style={BookStyles.categories}>
-								{book.categories.map((category, index) => (
-									<Text
-										key={index}
-										style={{ fontStyle: 'italic' }}
-									>
-										{category}
-										{index !== book.categories.length - 1 && ' |'}
-									</Text>
-								))}
-							</View>
-						</View>
-					</View>
-					<View>
-						<Progress percentage={book.progress} />
-					</View>
-				</View>
+				<BookTemplate book={book} />
 				<Text style={noTimeStyles.text}>
 					{selectedTime
 						? `You are reading ${selectedTime} minutes today, maximise your time`
@@ -135,5 +110,3 @@ export default function NoTime({ book }) {
 		</View>
 	);
 }
-
-

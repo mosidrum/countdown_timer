@@ -5,7 +5,6 @@ import TimePicker from './TimePicker';
 import SelectedTime from './SelectedTime';
 import Progress from './Progress';
 import BookTemplate from './BookTemplate';
-import ShareThoughts from './ShareThoughts';
 import LogModal from './LogModal';
 
 export {
@@ -16,6 +15,5 @@ export {
 	SelectedTime,
 	Progress,
 	BookTemplate,
-	ShareThoughts,
 	LogModal,
 };

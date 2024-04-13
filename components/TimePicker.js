@@ -1,12 +1,6 @@
-import React, { useState } from 'react';
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	StyleSheet,
-	FlatList,
-} from 'react-native';
-import { Colors } from '../constants';
+import React from 'react';
+import { View, Text, FlatList, Pressable } from 'react-native';
+import { timePickerStyles } from '../constants';
 import { useDispatch } from 'react-redux';
 import { setSelectedTime, stopCountdown } from '../reducers/timerSlice';
 
@@ -31,71 +25,32 @@ export default function TimePicker(props) {
 	};
 
 	const renderTimeOption = ({ item }) => (
-		<TouchableOpacity
-			style={styles.timeOption}
+		<Pressable
+			style={timePickerStyles.timeOption}
 			onPress={() => {
 				handleTimeSelection(item.value), setShow(false);
 			}}
 		>
 			<Text>{item.label}</Text>
-		</TouchableOpacity>
+		</Pressable>
 	);
 
 	return (
-		<View style={styles.container}>
-			<TouchableOpacity
-				style={styles.header}
+		<View style={timePickerStyles.container}>
+			<Pressable
+				style={timePickerStyles.header}
 				onPress={() => setShow(false)}
 			>
-				<Text style={styles.headerText}>Cancel</Text>
-			</TouchableOpacity>
-			<View style={styles.flatListContainer}>
+				<Text style={timePickerStyles.headerText}>Cancel</Text>
+			</Pressable>
+			<View style={timePickerStyles.flatListContainer}>
 				<FlatList
 					data={timeOptions}
 					renderItem={renderTimeOption}
 					keyExtractor={(item) => item.value.toString()}
-					style={styles.flatListContentContainer}
+					style={timePickerStyles.flatListContentContainer}
 				/>
 			</View>
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		position: 'absolute',
-		bottom: -20,
-		left: 0,
-		right: 0,
-		height: 200,
-		backgroundColor: '#fff',
-	},
-	flatListContainer: {
-		flex: 1,
-		maxHeight: 200,
-	},
-	flatListContentContainer: {
-		flexGrow: 1,
-	},
-	timeOption: {
-		paddingVertical: 16,
-		paddingHorizontal: 20,
-		borderBottomWidth: 1,
-		borderBottomColor: '#ccc',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	header: {
-		flexDirection: 'row',
-		justifyContent: 'flex-end',
-		paddingHorizontal: 20,
-		paddingVertical: 8,
-		borderBottomWidth: 1,
-		backgroundColor: Colors.background2,
-		borderBottomColor: '#ccc',
-	},
-	headerText: {
-		fontSize: 16,
-		fontWeight: 'bold',
-	},
-});

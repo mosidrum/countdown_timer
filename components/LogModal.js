@@ -1,12 +1,4 @@
-import {
-	View,
-	Text,
-	Modal,
-	StyleSheet,
-	TouchableOpacity,
-	TextInput,
-	Image,
-} from 'react-native';
+import { View, Modal, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Colors } from '../constants';
@@ -25,11 +17,11 @@ export default function LogModal({ visible, onClose, navigation }) {
 			visible={visible}
 			onRequestClose={onClose}
 		>
-			<View style={styles.centeredView}>
-				<View style={styles.modalView}>
-					<View style={{width: '100%'}}>
+			<View style={logModalStyles.centeredView}>
+				<View style={logModalStyles.modalView}>
+					<View style={{ width: '100%' }}>
 						<TouchableOpacity
-							style={styles.closeButton}
+							style={logModalStyles.closeButton}
 							onPress={onClose}
 						>
 							<FontAwesome
@@ -37,7 +29,7 @@ export default function LogModal({ visible, onClose, navigation }) {
 								size={26}
 							/>
 						</TouchableOpacity>
-						<View style={styles.modalContainer}>
+						<View style={logModalStyles.modalContainer}>
 							<TextInput
 								editable
 								multiline
@@ -55,7 +47,7 @@ export default function LogModal({ visible, onClose, navigation }) {
 								}}
 							/>
 						</View>
-						<View style={styles.button}>
+						<View style={logModalStyles.button}>
 							<Button
 								title="Submit"
 								backgroundColor={Colors.buttonColor}
@@ -68,37 +60,3 @@ export default function LogModal({ visible, onClose, navigation }) {
 		</Modal>
 	);
 }
-
-const styles = StyleSheet.create({
-	centeredView: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: 'rgba(0, 0, 0, 0.5)',
-	},
-	modalView: {
-		backgroundColor: 'white',
-		borderRadius: 20,
-		paddingHorizontal: 10,
-		height: '50%',
-		width: '95%',
-		alignItems: 'center',
-	},
-	modalContainer: {
-		width: '100%',
-		marginTop: 60,
-	},
-	text: {
-		fontSize: 22,
-		marginBottom: 14,
-	},
-	closeButton: {
-		position: 'absolute',
-		top: 14,
-		right: 12,
-	},
-	button: {
-		width: '100%',
-		marginTop: 16,
-	},
-});

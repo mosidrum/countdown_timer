@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import Colors from "./Colors";
+import { StyleSheet } from 'react-native';
+import Colors from './Colors';
 
 export const BookStyles = StyleSheet.create({
 	book: {
@@ -69,5 +69,113 @@ export const noTimeStyles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		paddingHorizontal: 10,
+	},
+});
+
+export const buttonStyles = StyleSheet.create({
+	button: {
+		paddingBottom: 16,
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		borderRadius: 12,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	text: {
+		color: Colors.black,
+		fontSize: 18,
+		fontWeight: '600',
+	},
+});
+
+export const timePickerStyles = StyleSheet.create({
+	container: {
+		position: 'absolute',
+		bottom: -20,
+		left: 0,
+		right: 0,
+		height: 200,
+		backgroundColor: '#fff',
+	},
+	flatListContainer: {
+		flex: 1,
+		maxHeight: 200,
+	},
+	flatListContentContainer: {
+		flexGrow: 1,
+	},
+	timeOption: {
+		paddingVertical: 16,
+		paddingHorizontal: 20,
+		borderBottomWidth: 1,
+		borderBottomColor: '#ccc',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		paddingHorizontal: 20,
+		paddingVertical: 8,
+		borderBottomWidth: 1,
+		backgroundColor: Colors.background2,
+		borderBottomColor: '#ccc',
+	},
+	headerText: {
+		fontSize: 16,
+		fontWeight: 'bold',
+	},
+});
+
+export const book = StyleSheet.create({
+	bookHeading: {
+		padding: 20,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+});
+
+export const selectedTimeStyles = StyleSheet.create({
+	container: {
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	time: {
+		fontSize: 26,
+		fontWeight: 'bold',
+	},
+});
+
+export const logModalStyles = StyleSheet.create({
+	centeredView: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+	},
+	modalView: {
+		backgroundColor: 'white',
+		borderRadius: 20,
+		paddingHorizontal: 10,
+		height: '50%',
+		width: '95%',
+		alignItems: 'center',
+	},
+	modalContainer: {
+		width: '100%',
+		marginTop: 60,
+	},
+	text: {
+		fontSize: 22,
+		marginBottom: 14,
+	},
+	closeButton: {
+		position: 'absolute',
+		top: 14,
+		right: 12,
+	},
+	button: {
+		width: '100%',
+		marginTop: 16,
 	},
 });
